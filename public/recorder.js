@@ -1,13 +1,16 @@
 (function(window) {
+    // Socket connection
     var socket = io('http://localhost:3700');
 
+    // readyForStream will be emmited when the connection has been established
     socket.on('readyForStream', function() {
         console.log('readyForStream');
 
-
-        if (!navigator.getUserMedia)
+        // check for browser-specific implementations
+        if (!navigator.getUserMedia) {
             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
                 navigator.mozGetUserMedia || navigator.msGetUserMedia;
+        }
 
         if (navigator.getUserMedia) {
             navigator.getUserMedia({
@@ -15,7 +18,9 @@
             }, success, function(e) {
                 alert('Error capturing audio.');
             });
-        } else alert('getUserMedia not supported in this browser.');
+        } else {
+            alert('getUserMedia not supported in this browser.');
+        }
 
         var recording = true;
 
@@ -29,16 +34,18 @@
             var bufferSize = 2048;
             recorder = context.createJavaScriptNode(bufferSize, 1, 1);
 
+            // define callback
             recorder.onaudioprocess = function(e) {
                 if (!recording) return;
                 var left = e.inputBuffer.getChannelData(0);
+
+                // emit the data converted to the server
                 socket.emit('streaming', {
                     stream: convertoFloat32ToInt16(left)
                 });
-                //play(left);
             };
 
-            audioInput.connect(recorder)
+            audioInput.connect(recorder);
             recorder.connect(context.destination);
         }
 
@@ -65,10 +72,7 @@
         while (l--) {
             buf[l] = buffer[l] * 0xFFFF; //convert to 16 bit
         }
-        return buf.buffer
+        return buf.buffer;
     }
-
-
-
 
 })(this);
