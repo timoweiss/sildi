@@ -11,3 +11,5 @@ To start run:
     npm start
 
 Then go to `http://localhost:3700`, accept the access for the mic and have a look at the Terminal.
+
+The implementation is highly inspired by [https://github.com/gabrielpoca/browser-pcm-stream](https://github.com/gabrielpoca/browser-pcm-stream)
