@@ -1,0 +1,19 @@
+{
+    "name": "silDi",
+    "version": "0.0.1",
+    "description": "Streaming music from to clients via websockets",
+    "main": "app.js",
+    "dependencies": {
+        "express": "^4.6.1",
+        "socket.io": "^1.0.6"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "scripts": {
+        "start": "node app.js"
+    },
+    "author": "timoweiss",
+    "license": "MIT"
+}
