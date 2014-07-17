@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/timoweiss/sildi.png?label=ready&title=Ready)](https://waffle.io/timoweiss/sildi)
 # SilDi - Silentdisco
 
 It streams pcm chunks from the browser's mic to the node server through websockets.
